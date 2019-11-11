@@ -15,7 +15,7 @@ class CodeEditor extends Component {
     this.getInitialState = this.getInitialState.bind(this);
     this.updateCode = this.updateCode.bind(this);
 
-    this.editorOptions = {rm
+    this.editorOptions = {
       lineNumbers: true
     };
 
