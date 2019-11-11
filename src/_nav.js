@@ -5,7 +5,7 @@ export default {
       url: '/pages',
       icon: 'cui-file',
       attributes: {
-        disabled: true
+        disabled: false
       }
     },
     {
