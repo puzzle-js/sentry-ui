@@ -1,7 +1,10 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container } from 'reactstrap';
+import socket from "../../socket";
+import { Context } from "../../context/puzzle-context";
+
 
 import {
   AppAside,
@@ -33,6 +36,32 @@ const DefaultLayout = (props) => {
     props.history.push('/login')
   }
 
+  const [pages, setPages] = useState([]);
+  const [gateways, setGateways] = useState([]);
+  const [fragments, setFragments] = useState([]);
+
+  const onPages = data => {
+    console.log("got pages", data);
+    setPages(data);
+  }
+
+  const onGateways = data => {
+    console.log("got gateways", data);
+    setGateways(data);
+  }
+
+  const onFragments = data => {
+    console.log("got fragments", data);
+    setFragments(data);
+  }
+
+  useEffect(() => {
+    socket.on("panel.pages", onPages);
+    socket.on("gateways", onGateways);
+    socket.on("fragments", onFragments);
+    return () => socket.close();
+  }, [])
+
   return (
     <div className="app">
       <AppHeader fixed>
@@ -52,25 +81,27 @@ const DefaultLayout = (props) => {
         </AppSidebar>
         <main className="main">
           <AppBreadcrumb appRoutes={routes} router={router} />
-          <Container fluid>
-            <Suspense fallback={loading()}>
-              <Switch>
-                {routes.map((route, idx) => {
-                  return route.component ? (
-                    <Route
-                      key={idx}
-                      path={route.path}
-                      exact={route.exact}
-                      name={route.name}
-                      render={props => (
-                        <route.component {...props} />
-                      )} />
-                  ) : (null);
-                })}
-                <Redirect from="/" to="/dashboard" />
-              </Switch>
-            </Suspense>
-          </Container>
+          <Context.Provider value={{ pages, gateways, fragments }}>
+            <Container fluid>
+              <Suspense fallback={loading()}>
+                <Switch>
+                  {routes.map((route, idx) => {
+                    return route.component ? (
+                      <Route
+                        key={idx}
+                        path={route.path}
+                        exact={route.exact}
+                        name={route.name}
+                        render={props => (
+                          <route.component {...props} />
+                        )} />
+                    ) : (null);
+                  })}
+                  <Redirect from="/" to="/dashboard" />
+                </Switch>
+              </Suspense>
+            </Container>
+          </Context.Provider>
         </main>
         <AppAside fixed>
           <Suspense fallback={loading()}>

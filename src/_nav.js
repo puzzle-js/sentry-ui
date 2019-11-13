@@ -29,7 +29,7 @@ export default {
       url: '/fragments',
       icon: 'cui-dashboard',
       attributes: {
-        disabled: true
+        disabled: false
       }
     },
     {

@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useContext } from 'react';
 import socket from '../../socket';
+import { Context } from '../../context/puzzle-context';
 
 const Pages = () => {
-  const [pages, setPages] = useState([])
-  const onPages = (data) => {
-    console.log("onPages", data);
-    setPages(data);
-  }
+  const { pages } = useContext(Context);
   useEffect(() => {
-    socket.emit("pages.get")
-    socket.on("pages", onPages)
+    socket.emit("panel.pages.get")
   }, [])
 
   return (
     <div className="animated fadeIn">
       {
-        Array.isArray(pages) && pages.map((page, i) => <div key={i}>{page}</div>)
+        Array.isArray(pages) && pages.map((page, i) => <div key={i}>{JSON.stringify(page)}</div>)
       }
     </div>
   );
