@@ -8,7 +8,6 @@ import { Context } from "../../context/puzzle-context";
 
 import {
   AppAside,
-  AppFooter,
   AppHeader,
   AppSidebar,
   AppSidebarFooter,
@@ -24,7 +23,6 @@ import navigation from '../../_nav';
 import routes from '../../routes';
 
 const DefaultAside = React.lazy(() => import('./DefaultAside'));
-const DefaultFooter = React.lazy(() => import('./DefaultFooter'));
 const DefaultHeader = React.lazy(() => import('./DefaultHeader'));
 
 const DefaultLayout = (props) => {
@@ -57,8 +55,8 @@ const DefaultLayout = (props) => {
 
   useEffect(() => {
     socket.on("panel.pages", onPages);
-    socket.on("gateways", onGateways);
-    socket.on("fragments", onFragments);
+    socket.on("panel.gateways", onGateways);
+    socket.on("panel.fragments", onFragments);
     return () => socket.close();
   }, [])
 
@@ -109,11 +107,6 @@ const DefaultLayout = (props) => {
           </Suspense>
         </AppAside>
       </div>
-      <AppFooter>
-        <Suspense fallback={loading()}>
-          <DefaultFooter />
-        </Suspense>
-      </AppFooter>
     </div>
   );
 }

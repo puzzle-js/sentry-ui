@@ -32,6 +32,7 @@
     "react-chartjs-2": "^2.7.6",
     "react-codemirror": "^1.0.0",
     "react-dom": "^16.8.6",
+    "react-markdown": "^4.2.2",
     "react-router-config": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-test-renderer": "^16.8.6",

@@ -1,0 +1,38 @@
+.CodeMirror {
+  height: 650px !important;
+}
+
+#page-column {
+  .add-button-wrapper {
+    width: 100%;
+    position: relative;
+  }
+  .add-button {
+    margin: 10px 0;
+    position: absolute;
+    right: 0;
+  }
+
+  .edit-button {
+    margin: 0 10px;
+  }
+}
+
+.inputs {
+  display: flex;
+  flex-direction: row;
+  padding: 0 10px;
+  margin-bottom: 15px;
+}
+
+.text-input {
+  margin: 5px;
+  flex: 1;
+}
+
+.page-add-modal-label {
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 15px;
+  margin-bottom: 5px;
+}
