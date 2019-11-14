@@ -5,7 +5,7 @@ import { Context } from '../../context/puzzle-context';
 const Gateways = () => {
   const { gateways } = useContext(Context);
   useEffect(() => {
-    socket.emit("gateways.get")
+    socket.emit("panel.gateways.get")
   }, [])
 
   return (

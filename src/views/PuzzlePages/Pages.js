@@ -1,16 +1,21 @@
 import React, { useEffect, useContext, useState } from 'react';
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown/with-html";
+import htmlParser from 'react-markdown/plugins/html-parser';
 import socket from '../../socket';
 import { Context } from '../../context/puzzle-context';
 import {
   Col, Nav, NavItem, NavLink, TabContent, TabPane, Row, Button
 } from "reactstrap";
 import { AddPageModal } from '../../components/AddPageModal';
+import { EditPageModal } from '../../components/EditPageModal';
+import { CodeEditor } from '../../components/CodeEditor';
 
 const Pages = () => {
   const { pages } = useContext(Context);
-  const [activeTab, setActiveTab] = useState('0')
-  const [addPageModalOpen, setAddPageModalOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState('0');
+  const [addPageModalOpen, setAddPageModalOpen] = useState(false);
+  const [editPageModalOpen, setEditPageModalOpen] = useState(false);
+  const [editModalData, setEditModalData] = useState({});
   useEffect(() => {
     socket.emit("panel.pages.get")
   }, [])
@@ -23,8 +28,13 @@ const Pages = () => {
     setAddPageModalOpen(false)
   }
 
-  const addPage = () => {
+  const editPageModalToggle = (e) => {
+    setEditPageModalOpen(false)
+  }
 
+  const openEditPageModal = (html, name, url, condition) => {
+    setEditModalData({ html, name, url, condition });
+    setEditPageModalOpen(true);
   }
 
   const nav = () => {
@@ -46,12 +56,14 @@ const Pages = () => {
         {activeTab === i.toString() &&
           <Row>
             <Col md="8">
-              <ReactMarkdown source={'```' + page.html + '```'} />
+              {page.url}
+              <hr />
+              <CodeEditor code={page.html} setCode={_ => null} />
+              {page.condition && <CodeEditor code={page.condition} setCode={_ => null} />}
             </Col>
             <Col md="4">
-              {i}
             </Col>
-            <Button onClick={(() => setAddPageModalOpen(true))} className="edit-button" color="success">Edit Page</Button>
+            <Button onClick={(() => openEditPageModal(page.html, page.name, page.url, page.condition))} className="edit-button" color="success">Edit Page</Button>
           </Row>
         }
       </TabPane>)
@@ -71,7 +83,8 @@ const Pages = () => {
               <Button onClick={(() => setAddPageModalOpen(true))} className="add-button" color="primary">Add Page</Button>
             </div>
           </Col>
-          <AddPageModal isOpen={addPageModalOpen} toggle={addPageModalToggle} addPage={addPage} />
+          <AddPageModal isOpen={addPageModalOpen} toggle={addPageModalToggle} />
+          <EditPageModal isOpen={editPageModalOpen} toggle={editPageModalToggle} data={editModalData} />
         </>
       }
     </div>
