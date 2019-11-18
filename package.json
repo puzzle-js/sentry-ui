@@ -1,7 +1,7 @@
 {
-  "name": "@puzzle-js/sentry",
+  "name": "@puzzle-js/sentry-ui",
   "version": "0.0.1",
-  "description": "React Sentry",
+  "description": "Puzzle Sentry Ui",
   "author": "Mehmet Sefa Balık",
   "homepage": "https://www.puzzlejs.io",
   "license": "MIT",
