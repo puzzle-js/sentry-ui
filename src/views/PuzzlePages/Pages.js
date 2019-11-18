@@ -1,6 +1,4 @@
 import React, { useEffect, useContext, useState } from 'react';
-import ReactMarkdown from "react-markdown/with-html";
-import htmlParser from 'react-markdown/plugins/html-parser';
 import socket from '../../socket';
 import { Context } from '../../context/puzzle-context';
 import {
