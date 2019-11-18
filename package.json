@@ -5,7 +5,6 @@
   "author": "Mehmet Sefa Balık @mehmetsefabalik",
   "homepage": "https://www.puzzlejs.io",
   "license": "MIT",
-  "private": true,
   "repository": {
     "type": "git",
     "url": "git@github.com:puzzle-js/sentry.git"
