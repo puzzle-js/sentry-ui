@@ -7,18 +7,18 @@ import socket from '../socket';
 const AddGatewayModal = ({ isOpen, toggle }) => {
   const [name, setName] = useState("");
   const [url, setUrl] = useState("");
-  const [assetsUrl, setAssetsUrl] = useState("");
+  const [assetUrl, setAssetUrl] = useState("");
   const cleanState = () => {
     setName("");
     setUrl("");
-    setAssetsUrl("");
+    setAssetUrl("");
   }
   const toggleModal = () => {
     cleanState();
     toggle();
   }
   const saveGateway = () => {
-    socket.emit("panel.gateways.add", { name, url, assetsUrl })
+    socket.emit("panel.gateways.add", { name, url, assetUrl })
     toggleModal();
   }
   return <Modal size="lg" isOpen={isOpen} toggle={toggleModal} className={'modal-primary'}>
@@ -31,7 +31,7 @@ const AddGatewayModal = ({ isOpen, toggle }) => {
         <div className="text-input">
           <Input type="text" placeholder="url" onChange={e => setUrl(e.target.value)}></Input>
         </div><div className="text-input">
-          <Input type="text" placeholder="assetsUrl" onChange={e => setAssetsUrl(e.target.value)}></Input>
+          <Input type="text" placeholder="assetUrl" onChange={e => setAssetUrl(e.target.value)}></Input>
         </div>
       </div>
     </ModalBody>
