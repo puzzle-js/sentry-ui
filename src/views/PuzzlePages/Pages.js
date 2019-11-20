@@ -30,8 +30,8 @@ const Pages = () => {
     setEditPageModalOpen(false)
   }
 
-  const openEditPageModal = (html, name, url, condition) => {
-    setEditModalData({html, name, url, condition});
+  const openEditPageModal = (page) => {
+    setEditModalData(page);
     setEditPageModalOpen(true);
   }
 
@@ -78,7 +78,7 @@ const Pages = () => {
                     style={{height: '100%', width: '100%', border: 'none', minHeight: '600px'}}/>
             }
           </Col>
-          <Button onClick={(() => openEditPageModal(page.html, page.name, page.url, page.condition))}
+          <Button onClick={(() => openEditPageModal(page))}
             className="edit-button" color="primary">Edit Page</Button>
           <Button onClick={() => onDeletePage(page.name)}
                   className="edit-button" color="danger">Delete Page</Button>
