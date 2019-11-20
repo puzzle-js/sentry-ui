@@ -95,7 +95,7 @@ const DefaultLayout = (props) => {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from="/" to="/dashboard" />
+                  <Redirect from="/" to="/pages" />
                 </Switch>
               </Suspense>
             </Container>

@@ -1,4 +1,4 @@
 import io from "socket.io-client";
 
 //export default io("http://localhost:3335");
-export default io("/");
+export default io("http://10.10.49.183:3335");
