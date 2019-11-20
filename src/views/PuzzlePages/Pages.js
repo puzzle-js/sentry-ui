@@ -61,7 +61,7 @@ const Pages = () => {
           </Col>
           <Col md="4">
             {page.demoUrl &&
-            <iframe src={page.demoUrl}
+            <iframe src={page.demoUrl} title="demo"
                     style={{height: '100%', width: '100%', border: 'none', minHeight: '600px'}}/>
             }
           </Col>
