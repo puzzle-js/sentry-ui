@@ -31,6 +31,13 @@ const Gateways = () => {
     </Nav>
   }
 
+  const onDeletePage = (name) => {
+    const del = window.confirm("Do you want to delete page?");
+    if (del) {
+      socket.emit("panel.gateways.delete", {name})
+    }
+  }
+
   const tabPane = () => {
     return <TabContent activeTab={activeTab}>
       {gateways.map((gw, i) => <TabPane key={i} tabId={i.toString()}>
@@ -43,6 +50,8 @@ const Gateways = () => {
             </Col>
             <Col md="4">
             </Col>
+            <Button onClick={() => onDeletePage(gw.name)}
+              className="delete-button" color="danger">Delete Gateway</Button>
           </Row>
         }
       </TabPane>)
@@ -58,9 +67,7 @@ const Gateways = () => {
           <Col id="page-column" xs="12" md="12" className="mb-4">
             {nav()}
             {tabPane()}
-            <div className="add-button-wrapper">
-              <Button onClick={(() => setEditPageModalOpen(true))} className="add-button" color="primary">Add Gateway</Button>
-            </div>
+            <Button onClick={(() => setEditPageModalOpen(true))} className="add-button" color="success">Add Gateway</Button>
           </Col>
           <AddGatewayModal isOpen={editPageModalOpen} toggle={() => setEditPageModalOpen(false)} />
         </>

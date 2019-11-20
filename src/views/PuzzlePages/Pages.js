@@ -35,6 +35,13 @@ const Pages = () => {
     setEditPageModalOpen(true);
   }
 
+  const onDeletePage = (name) => {
+    const del = window.confirm("Do you want to delete page?");
+    if (del) {
+      socket.emit("panel.pages.delete", {name})
+    }
+  }
+
   const nav = () => {
     return <Nav tabs>
       {pages.map((page, i) => <NavItem key={i}>
@@ -45,6 +52,12 @@ const Pages = () => {
           {page.name}
         </NavLink>
       </NavItem>)}
+      <NavItem>
+        <NavLink>
+          <Button onClick={(() => setAddPageModalOpen(true))} className="add-button" color="success">Add
+                Page</Button>
+        </NavLink>
+      </NavItem>
     </Nav>
   }
 
@@ -66,7 +79,9 @@ const Pages = () => {
             }
           </Col>
           <Button onClick={(() => openEditPageModal(page.html, page.name, page.url, page.condition))}
-                  className="edit-button" color="success">Edit Page</Button>
+            className="edit-button" color="primary">Edit Page</Button>
+          <Button onClick={() => onDeletePage(page.name)}
+                  className="edit-button" color="danger">Delete Page</Button>
         </Row>
         }
       </TabPane>)
@@ -82,10 +97,6 @@ const Pages = () => {
           <Col id="page-column" xs="12" md="12" className="mb-4">
             {nav()}
             {tabPane()}
-            <div className="add-button-wrapper">
-              <Button onClick={(() => setAddPageModalOpen(true))} className="add-button" color="primary">Add
-                Page</Button>
-            </div>
           </Col>
           <AddPageModal isOpen={addPageModalOpen} toggle={addPageModalToggle}/>
           <EditPageModal isOpen={editPageModalOpen} toggle={editPageModalToggle} data={editModalData}/>
