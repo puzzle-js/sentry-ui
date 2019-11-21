@@ -1,15 +1,15 @@
-import React, {useEffect, useContext, useState} from 'react';
+import React, { useEffect, useContext, useState } from 'react';
 import socket from '../../socket';
-import {Context} from '../../context/puzzle-context';
+import { Context } from '../../context/puzzle-context';
 import {
   Col, Nav, NavItem, NavLink, TabContent, TabPane, Row, Button
 } from "reactstrap";
-import {AddPageModal} from '../../components/AddPageModal';
-import {EditPageModal} from '../../components/EditPageModal';
-import {CodeEditor} from '../../components/CodeEditor';
+import { AddPageModal } from '../../components/AddPageModal';
+import { EditPageModal } from '../../components/EditPageModal';
+import { CodeEditor } from '../../components/CodeEditor';
 
 const Pages = () => {
-  const {pages} = useContext(Context);
+  const { pages } = useContext(Context);
   const [activeTab, setActiveTab] = useState('0');
   const [addPageModalOpen, setAddPageModalOpen] = useState(false);
   const [editPageModalOpen, setEditPageModalOpen] = useState(false);
@@ -38,7 +38,7 @@ const Pages = () => {
   const onDeletePage = (name) => {
     const del = window.confirm("Do you want to delete page?");
     if (del) {
-      socket.emit("panel.pages.delete", {name})
+      socket.emit("panel.pages.delete", { name })
     }
   }
 
@@ -52,12 +52,8 @@ const Pages = () => {
           {page.name}
         </NavLink>
       </NavItem>)}
-      <NavItem>
-        <NavLink>
-          <Button onClick={(() => setAddPageModalOpen(true))} className="add-button" color="success">Add
+      <Button onClick={(() => setAddPageModalOpen(true))} className="add-button" color="success">Add
                 Page</Button>
-        </NavLink>
-      </NavItem>
     </Nav>
   }
 
@@ -65,24 +61,24 @@ const Pages = () => {
     return <TabContent activeTab={activeTab}>
       {pages.map((page, i) => <TabPane key={i} tabId={i.toString()}>
         {activeTab === i.toString() &&
-        <Row>
-          <Col md="8">
-            {page.url}
-            <hr/>
-            <CodeEditor code={page.html} setCode={_ => null} disabled/>
-            {page.condition && <CodeEditor code={page.condition} setCode={_ => null}/>}
-          </Col>
-          <Col md="4">
-            {page.demoUrl &&
-            <iframe src={page.demoUrl} title="demo"
-                    style={{height: '100%', width: '100%', border: 'none', minHeight: '600px'}}/>
-            }
-          </Col>
-          <Button onClick={(() => openEditPageModal(page))}
-            className="edit-button" color="primary">Edit Page</Button>
-          <Button onClick={() => onDeletePage(page.name)}
-                  className="edit-button" color="danger">Delete Page</Button>
-        </Row>
+          <Row>
+            <Col md="8">
+              {page.url}
+              <hr />
+              <CodeEditor code={page.html} setCode={_ => null} disabled />
+              {page.condition && <CodeEditor code={page.condition} setCode={_ => null} />}
+            </Col>
+            <Col md="4">
+              {page.demoUrl &&
+                <iframe src={page.demoUrl} title="demo"
+                  style={{ height: '100%', width: '100%', border: 'none', minHeight: '600px' }} />
+              }
+            </Col>
+            <Button onClick={(() => openEditPageModal(page))}
+              className="edit-button" color="primary">Edit Page</Button>
+            <Button onClick={() => onDeletePage(page.name)}
+              className="edit-button" color="danger">Delete Page</Button>
+          </Row>
         }
       </TabPane>)
       }
@@ -98,8 +94,8 @@ const Pages = () => {
             {nav()}
             {tabPane()}
           </Col>
-          <AddPageModal isOpen={addPageModalOpen} toggle={addPageModalToggle}/>
-          <EditPageModal isOpen={editPageModalOpen} toggle={editPageModalToggle} data={editModalData}/>
+          <AddPageModal isOpen={addPageModalOpen} toggle={addPageModalToggle} />
+          <EditPageModal isOpen={editPageModalOpen} toggle={editPageModalToggle} data={editModalData} />
         </>
       }
     </div>
