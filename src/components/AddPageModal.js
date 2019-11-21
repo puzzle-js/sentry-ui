@@ -4,6 +4,7 @@ import {
 } from "reactstrap";
 import socket from '../socket';
 import { CodeEditor } from "./CodeEditor";
+import { readCookie } from "@mehmetsefabalik/cookie-helper";
 
 const AddPageModal = ({ isOpen, toggle }) => {
   const [html, setHtml] = useState("");
@@ -26,7 +27,7 @@ const AddPageModal = ({ isOpen, toggle }) => {
     toggle();
   }
   const savePage = () => {
-    socket.emit("panel.pages.add", { html, condition, name, url, demoUrl, index })
+    socket.emit("panel.pages.add", { html, condition, name, url, demoUrl, index, auth: readCookie("auth") })
     toggleModal();
   }
   return <Modal size="xl" isOpen={isOpen} toggle={toggleModal} className={'modal-primary'}>

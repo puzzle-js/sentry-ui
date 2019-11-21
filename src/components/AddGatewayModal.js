@@ -3,6 +3,7 @@ import {
   Button, Modal, ModalHeader, ModalBody, ModalFooter, Input
 } from "reactstrap";
 import socket from '../socket';
+import { readCookie } from "@mehmetsefabalik/cookie-helper/dist";
 
 const AddGatewayModal = ({ isOpen, toggle }) => {
   const [name, setName] = useState("");
@@ -18,7 +19,7 @@ const AddGatewayModal = ({ isOpen, toggle }) => {
     toggle();
   }
   const saveGateway = () => {
-    socket.emit("panel.gateways.add", { name, url, assetUrl })
+    socket.emit("panel.gateways.add", { name, url, assetUrl, auth: readCookie("auth") })
     toggleModal();
   }
   return <Modal size="lg" isOpen={isOpen} toggle={toggleModal} className={'modal-primary'}>

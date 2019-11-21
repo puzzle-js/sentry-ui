@@ -5,6 +5,7 @@ import {
 import socket from '../../socket';
 import { Context } from '../../context/puzzle-context';
 import { AddGatewayModal } from "../../components/AddGatewayModal";
+import { readCookie } from '@mehmetsefabalik/cookie-helper/dist';
 
 const Gateways = () => {
   const { gateways } = useContext(Context);
@@ -34,7 +35,7 @@ const Gateways = () => {
   const onDeletePage = (name) => {
     const del = window.confirm("Do you want to delete page?");
     if (del) {
-      socket.emit("panel.gateways.delete", {name})
+      socket.emit("panel.gateways.delete", { name, auth: readCookie("auth") })
     }
   }
 

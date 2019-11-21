@@ -7,6 +7,7 @@ import {
 import { AddPageModal } from '../../components/AddPageModal';
 import { EditPageModal } from '../../components/EditPageModal';
 import { CodeEditor } from '../../components/CodeEditor';
+import { readCookie } from "@mehmetsefabalik/cookie-helper";
 
 const Pages = () => {
   const { pages } = useContext(Context);
@@ -38,7 +39,7 @@ const Pages = () => {
   const onDeletePage = (name) => {
     const del = window.confirm("Do you want to delete page?");
     if (del) {
-      socket.emit("panel.pages.delete", { name })
+      socket.emit("panel.pages.delete", { name, auth: readCookie("auth") })
     }
   }
 

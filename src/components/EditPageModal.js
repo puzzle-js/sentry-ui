@@ -4,6 +4,7 @@ import {
 } from "reactstrap";
 import socket from '../socket';
 import { CodeEditor } from "./CodeEditor";
+import { readCookie } from "@mehmetsefabalik/cookie-helper";
 
 const EditPageModal = ({ isOpen, toggle, data }) => {
   console.log("data", data)
@@ -27,7 +28,7 @@ const EditPageModal = ({ isOpen, toggle, data }) => {
     toggle();
   }
   const savePage = () => {
-    socket.emit("panel.pages.update", { html, condition, name, url, demoUrl, index })
+    socket.emit("panel.pages.update", { html, condition, name, url, demoUrl, index, auth: readCookie("auth") })
     toggleModal();
   }
   useEffect(() => {
