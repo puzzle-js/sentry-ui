@@ -30,6 +30,14 @@ export default {
       }
     },
     {
+      name: 'Gateway Configurations',
+      url: '/gateway-configurations',
+      icon: 'icon-wrench',
+      attributes: {
+        disabled: false
+      }
+    },
+    {
       name: 'Fragments',
       url: '/fragments',
       icon: 'cui-dashboard',

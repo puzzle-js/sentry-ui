@@ -38,25 +38,26 @@ const DefaultLayout = (props) => {
   const [gateways, setGateways] = useState([]);
   const [fragments, setFragments] = useState([]);
   const [storefrontConfigurations, setStorefrontConfigurations] = useState([]);
+  const [gatewayConfigurations, setGatewayConfigurations] = useState([]);
 
   const onPages = data => {
-    console.log("got pages", data);
     setPages(data);
   }
 
   const onGateways = data => {
-    console.log("got gateways", data);
     setGateways(data);
   }
 
   const onFragments = data => {
-    console.log("got fragments", data);
     setFragments(data);
   }
 
   const onStorefrontConfigs = data => {
-    console.log("got storefront configs", data);
     setStorefrontConfigurations(data);
+  }
+
+  const onGatewayConfigs = data => {
+    setGatewayConfigurations(data);
   }
 
   useEffect(() => {
@@ -64,6 +65,7 @@ const DefaultLayout = (props) => {
     socket.on("panel.gateways", onGateways);
     socket.on("panel.fragments", onFragments);
     socket.on("panel.configurations.storefronts", onStorefrontConfigs);
+    socket.on("panel.configurations.gateways", onGatewayConfigs);
     return () => socket.close();
   }, [])
 
@@ -86,7 +88,7 @@ const DefaultLayout = (props) => {
         </AppSidebar>
         <main className="main">
           <AppBreadcrumb appRoutes={routes} router={router} />
-          <Context.Provider value={{ pages, gateways, fragments, storefrontConfigurations }}>
+          <Context.Provider value={{ pages, gateways, fragments, storefrontConfigurations, gatewayConfigurations }}>
             <Container fluid>
               <Suspense fallback={loading()}>
                 <Switch>
