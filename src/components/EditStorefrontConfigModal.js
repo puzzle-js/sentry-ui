@@ -36,7 +36,7 @@ const EditStorefrontConfigModal = ({ isOpen, toggle, data }) => {
           <Input type="text" placeholder="Storefront Name" value={name} disabled></Input>
         </div>
       </div>
-      <CodeEditor code={configurations} setCode={(code) => (console.log("code", code),setConfigurations(code))} />
+      <CodeEditor code={configurations} setCode={(code) => setConfigurations(code)} />
     </ModalBody>
     <ModalFooter>
       <Button color="primary" onClick={saveStorefrontConfig}>Edit</Button>{' '}
