@@ -7,7 +7,6 @@ import { CodeEditor } from "./CodeEditor";
 import { readCookie } from "@mehmetsefabalik/cookie-helper";
 
 const EditPageModal = ({ isOpen, toggle, data }) => {
-  console.log("data", data)
   const [html, setHtml] = useState(data.html);
   const [condition, setCondition] = useState(data.condition);
   const [name, setName] = useState(data.name);
@@ -15,16 +14,7 @@ const EditPageModal = ({ isOpen, toggle, data }) => {
   const [demoUrl, setDemoUrl] = useState(data.demoUrl);
   const [index, setIndex] = useState(data.index);
   const [conditionEnabled, setConditionEnabled] = useState(false);
-  const cleanState = () => {
-    setHtml("");
-    setCondition("");
-    setName("");
-    setUrl("");
-    setDemoUrl("");
-    setIndex("");
-  }
   const toggleModal = () => {
-    cleanState();
     toggle();
   }
   const savePage = () => {

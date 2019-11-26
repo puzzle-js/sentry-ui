@@ -22,11 +22,11 @@ export default {
       }
     },
     {
-      name: 'Configuration',
-      url: '/configuration',
+      name: 'Storefront Configurations',
+      url: '/storefront-configurations',
       icon: 'icon-wrench',
       attributes: {
-        disabled: true
+        disabled: false
       }
     },
     {

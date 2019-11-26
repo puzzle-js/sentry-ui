@@ -37,6 +37,7 @@ const DefaultLayout = (props) => {
   const [pages, setPages] = useState([]);
   const [gateways, setGateways] = useState([]);
   const [fragments, setFragments] = useState([]);
+  const [storefrontConfigurations, setStorefrontConfigurations] = useState([]);
 
   const onPages = data => {
     console.log("got pages", data);
@@ -53,10 +54,16 @@ const DefaultLayout = (props) => {
     setFragments(data);
   }
 
+  const onStorefrontConfigs = data => {
+    console.log("got storefront configs", data);
+    setStorefrontConfigurations(data);
+  }
+
   useEffect(() => {
     socket.on("panel.pages", onPages);
     socket.on("panel.gateways", onGateways);
     socket.on("panel.fragments", onFragments);
+    socket.on("panel.configurations.storefronts", onStorefrontConfigs);
     return () => socket.close();
   }, [])
 
@@ -79,7 +86,7 @@ const DefaultLayout = (props) => {
         </AppSidebar>
         <main className="main">
           <AppBreadcrumb appRoutes={routes} router={router} />
-          <Context.Provider value={{ pages, gateways, fragments }}>
+          <Context.Provider value={{ pages, gateways, fragments, storefrontConfigurations }}>
             <Container fluid>
               <Suspense fallback={loading()}>
                 <Switch>

@@ -10,7 +10,7 @@ import { readCookie } from '@mehmetsefabalik/cookie-helper/dist';
 const Gateways = () => {
   const { gateways } = useContext(Context);
   const [activeTab, setActiveTab] = useState('0');
-  const [editPageModalOpen, setEditPageModalOpen] = useState(false);
+  const [addGatewayModalOpen, setAddGatewayModalOpen] = useState(false);
   useEffect(() => {
     socket.emit("panel.gateways.get")
   }, [])
@@ -68,9 +68,9 @@ const Gateways = () => {
           <Col id="page-column" xs="12" md="12" className="mb-4">
             {nav()}
             {tabPane()}
-            <Button onClick={(() => setEditPageModalOpen(true))} className="add-button" color="success">Add Gateway</Button>
+            <Button onClick={(() => setAddGatewayModalOpen(true))} className="add-button" color="success">Add Gateway</Button>
           </Col>
-          <AddGatewayModal isOpen={editPageModalOpen} toggle={() => setEditPageModalOpen(false)} />
+          <AddGatewayModal isOpen={addGatewayModalOpen} toggle={() => setAddGatewayModalOpen(false)} />
         </>
       }
     </div>
