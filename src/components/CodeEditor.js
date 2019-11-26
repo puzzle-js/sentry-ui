@@ -1,13 +1,13 @@
 import React, { useRef } from 'react';
 import CodeMirror from "react-codemirror";
-import Col from "reactstrap/es/Col";
+import { Col } from "reactstrap";
 
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/mode/htmlmixed/htmlmixed';
 import 'codemirror/theme/darcula.css';
 
 
-const CodeEditor = ({ code, setCode, disabled}) => {
+const CodeEditor = ({ code, setCode, disabled }) => {
   const codeMirror = useRef();
   const editorOptions = {
     lineNumbers: true,
